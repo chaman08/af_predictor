@@ -16,14 +16,14 @@ def predict():
     try:
         # Read inputs from form
         features = [
-            float(request.form['l_pull']),
-            float(request.form['cf']),
-            float(request.form['p']),
-            float(request.form['hole_depth']),
-            float(request.form['r']),
-            float(request.form['total_ch']),
-            float(request.form['q']),
-            float(request.form['ucs']),
+            float(request.form['l (pull)']),
+            float(request.form['Cf']),
+            float(request.form['P']),
+            float(request.form['d']),
+            float(request.form['R']),
+            float(request.form['T']),
+            float(request.form['Q']),
+            float(request.form['UCS']),
         ]
         final_features = [np.array(features)]
         
