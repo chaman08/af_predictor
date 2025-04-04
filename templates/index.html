@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Advancement Factor Predictor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0f0f0f;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #00ffcc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #00ffcc;
+            text-align: center;
+        }
+
+        form {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #00ffcc;
+            width: 90%;
+            max-width: 600px;
+            display: grid;
+            gap: 15px;
+        }
+
+        label {
+            color: #b2fefa;
+            margin-top: 10px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #00ffcc;
+            background-color: #111;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            padding: 12px;
+            background-color: #00ffcc;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #00e6b8;
+        }
+
+        .prediction {
+            margin-top: 20px;
+            padding: 15px 20px;
+            background-color: #222;
+            border: 1px solid #00ffcc;
+            border-radius: 10px;
+            box-shadow: 0 0 8px #00ffcc;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+                padding: 0 10px;
+            }
+
+            form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Advancement Factor Prediction</h1>
+    <form action="/predict" method="post">
+        <label>l (pull):</label>
+        <input type="number" step="any" name="l (pull)" required>
+
+        <label>Cf:</label>
+        <input type="number" step="any" name="Cf" required>
+
+        <label>P:</label>
+        <input type="number" step="any" name="P" required>
+
+        <label>Hole Depth (d):</label>
+        <input type="number" step="any" name="d" required>
+
+        <label>R:</label>
+        <input type="number" step="any" name="R" required>
+
+        <label>Total Charge (T):</label>
+        <input type="number" step="any" name="T" required>
+
+        <label>Q:</label>
+        <input type="number" step="any" name="Q" required>
+
+        <label>UCS:</label>
+        <input type="number" step="any" name="UCS" required>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction_text %}
+    <div class="prediction">
+        {{ prediction_text }}
+    </div>
+    {% endif %}
+</body>
+</html>
