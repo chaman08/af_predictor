@@ -5,10 +5,7 @@
     <title>Advancement Factor Predictor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
+        * { box-sizing: border-box; }
         body {
             margin: 0;
             padding: 0;
@@ -21,14 +18,12 @@
             justify-content: center;
             min-height: 100vh;
         }
-
         h1 {
             margin-bottom: 20px;
             font-size: 2em;
             color: #00ffcc;
             text-align: center;
         }
-
         form {
             background-color: #1a1a1a;
             padding: 30px;
@@ -39,12 +34,9 @@
             display: grid;
             gap: 15px;
         }
-
         label {
             color: #b2fefa;
-            margin-top: 10px;
         }
-
         input[type="number"] {
             width: 100%;
             padding: 10px;
@@ -54,7 +46,6 @@
             border-radius: 8px;
             font-size: 16px;
         }
-
         input[type="submit"] {
             padding: 12px;
             background-color: #00ffcc;
@@ -65,61 +56,47 @@
             cursor: pointer;
             font-size: 16px;
             transition: background 0.3s;
-            margin-top: 10px;
         }
-
         input[type="submit"]:hover {
             background-color: #00e6b8;
         }
-
         .prediction {
             margin-top: 20px;
-            padding: 15px 20px;
+            padding: 15px;
             background-color: #222;
             border: 1px solid #00ffcc;
             border-radius: 10px;
             box-shadow: 0 0 8px #00ffcc;
             text-align: center;
         }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 1.5em;
-                padding: 0 10px;
-            }
-
-            form {
-                padding: 20px;
-            }
-        }
     </style>
 </head>
 <body>
     <h1>Advancement Factor Prediction</h1>
     <form action="/predict" method="post">
-        <label>l (pull):</label>
-        <input type="number" step="any" name="l (pull)" required>
+        <label for="W">Maximum Charge per Delay (W):</label>
+        <input type="number" step="any" name="W" required>
 
-        <label>Cf:</label>
+        <label for="N (no. of holes)">Number of Holes (N):</label>
+        <input type="number" step="any" name="N (no. of holes)" required>
+
+        <label for="T (total ch)">Total Charge (T):</label>
+        <input type="number" step="any" name="T (total ch)" required>
+
+        <label for="q">Specific Charge (q):</label>
+        <input type="number" step="any" name="q" required>
+
+        <label for="Cf">Confinement Factor (f):</label>
         <input type="number" step="any" name="Cf" required>
 
-        <label>P:</label>
-        <input type="number" step="any" name="P" required>
+        <label for="UCS">Unconfined Compressive Strength (UCS):</label>
+        <input type="number" step="any" name="UCS" required>
 
-        <label>Hole Depth (d):</label>
-        <input type="number" step="any" name="d" required>
-
-        <label>R:</label>
-        <input type="number" step="any" name="R" required>
-
-        <label>Total Charge (T):</label>
-        <input type="number" step="any" name="T" required>
-
-        <label>Q:</label>
+        <label for="Q">Rock Mass Quality (Q-System):</label>
         <input type="number" step="any" name="Q" required>
 
-        <label>UCS:</label>
-        <input type="number" step="any" name="UCS" required>
+        <label for=" d(hole depth)">Hole Depth (d):</label>
+        <input type="number" step="any" name=" d(hole depth)" required>
 
         <input type="submit" value="Predict">
     </form>
