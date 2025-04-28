@@ -2,108 +2,88 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Advancement Factor Predictor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blast Parameter Prediction</title>
     <style>
-        * { box-sizing: border-box; }
         body {
-            margin: 0;
-            padding: 0;
             background-color: #0f0f0f;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #00ffcc;
+            color: #00ffea;
+            font-family: 'Orbitron', sans-serif;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            flex-direction: column;
             min-height: 100vh;
+            margin: 0;
         }
+
         h1 {
             margin-bottom: 20px;
-            font-size: 2em;
-            color: #00ffcc;
-            text-align: center;
+            font-size: 2.5em;
+            text-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea;
         }
+
         form {
             background-color: #1a1a1a;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 0 20px #00ffcc;
-            width: 90%;
-            max-width: 600px;
-            display: grid;
+            box-shadow: 0 0 20px #00ffea;
+            display: flex;
+            flex-direction: column;
             gap: 15px;
+            width: 300px;
         }
-        label {
-            color: #b2fefa;
-        }
-        input[type="number"] {
-            width: 100%;
+
+        input[type="number"], button {
             padding: 10px;
-            border: 1px solid #00ffcc;
-            background-color: #111;
-            color: #fff;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-        input[type="submit"] {
-            padding: 12px;
-            background-color: #00ffcc;
-            color: #000;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
-        }
-        input[type="submit"]:hover {
-            background-color: #00e6b8;
-        }
-        .prediction {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #222;
-            border: 1px solid #00ffcc;
             border-radius: 10px;
-            box-shadow: 0 0 8px #00ffcc;
-            text-align: center;
+            border: none;
+            font-size: 1em;
+            background-color: #0f0f0f;
+            color: #00ffea;
+            box-shadow: 0 0 10px #00ffea;
+            outline: none;
+        }
+
+        input[type="number"]::placeholder {
+            color: #00ffeaa5;
+        }
+
+        button {
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #00ffea;
+            color: #0f0f0f;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em;
+            text-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea;
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Advancement Factor Prediction</h1>
-    <form action="/predict" method="post">
-        <label for="W">Maximum Charge per Delay (W):</label>
-        <input type="number" step="any" name="W" required>
-
-        <label for="N (no. of holes)">Number of Holes (N):</label>
-        <input type="number" step="any" name="N (no. of holes)" required>
-
-        <label for="T (total ch)">Total Charge (T):</label>
-        <input type="number" step="any" name="T (total ch)" required>
-
-        <label for="q">Specific Charge (q):</label>
-        <input type="number" step="any" name="q" required>
-
-        <label for="Cf">Confinement Factor (f):</label>
-        <input type="number" step="any" name="Cf" required>
-
-        <label for="UCS">Unconfined Compressive Strength (UCS):</label>
-        <input type="number" step="any" name="UCS" required>
-
-        <label for="Q">Rock Mass Quality (Q-System):</label>
-        <input type="number" step="any" name="Q" required>
-
-        <label for=" d(hole depth)">Hole Depth (d):</label>
-        <input type="number" step="any" name=" d(hole depth)" required>
-
-        <input type="submit" value="Predict">
+    <h1>Blast Parameter Prediction</h1>
+    <form method="POST">
+        <input type="number" name="W" placeholder="W" step="any" required>
+        <input type="number" name="N" placeholder="N (No. of holes)" step="any" required>
+        <input type="number" name="T" placeholder="T (Total ch)" step="any" required>
+        <input type="number" name="q" placeholder="q" step="any" required>
+        <input type="number" name="Cf" placeholder="Cf" step="any" required>
+        <input type="number" name="UCS" placeholder="UCS" step="any" required>
+        <input type="number" name="RQD" placeholder="RQD" step="any" required>
+        <input type="number" name="d" placeholder="d (Hole depth)" step="any" required>
+        <button type="submit">Predict</button>
     </form>
 
-    {% if prediction_text %}
-    <div class="prediction">
-        {{ prediction_text }}
+    {% if prediction is not none %}
+    <div class="result">
+        Prediction: {{ prediction }}
     </div>
     {% endif %}
 </body>

@@ -1,39 +1,39 @@
+# app.py
 from flask import Flask, render_template, request
-import numpy as np
 import pickle
+import numpy as np
 
 app = Flask(__name__)
 
 # Load the trained model
-with open("linear_regression_model (4).pkl", "rb") as file:
-    model = pickle.load(file)
+with open('linear_regression_model (5).pkl', 'rb') as f:
+    model = pickle.load(f)
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        try:
+            # Fetch all input fields
+            W = float(request.form['W'])
+            N = float(request.form['N'])
+            T = float(request.form['T'])
+            q = float(request.form['q'])
+            Cf = float(request.form['Cf'])
+            UCS = float(request.form['UCS'])
+            RQD = float(request.form['RQD'])
+            d = float(request.form['d'])
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    try:
-        # Collect inputs from form
-        input_features = [
-            float(request.form['W']),
-            float(request.form['N (no. of holes)']),
-            float(request.form['T (total ch)']),
-            float(request.form['q']),
-            float(request.form['Cf']),
-            float(request.form['UCS']),
-            float(request.form['Q']),
-            float(request.form[' d(hole depth)'])
-        ]
+            # Prepare the input for prediction
+            input_features = np.array([[W, N, T, q, Cf, UCS, RQD, d]])
 
-        input_array = np.array(input_features).reshape(1, -1)
-        prediction = model.predict(input_array)[0]
+            # Make prediction
+            prediction = model.predict(input_features)[0]
 
-        return render_template('index.html', prediction_text=f'Predicted Advancement Factor: {prediction:.2f}')
-    
-    except Exception as e:
-        return f"Error: {e}", 400
+            return render_template('index.html', prediction=prediction)
+        except Exception as e:
+            return render_template('index.html', prediction=f"Error: {str(e)}")
+
+    return render_template('index.html', prediction=None)
 
 if __name__ == '__main__':
     app.run(debug=True)
